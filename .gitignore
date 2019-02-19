@@ -1,0 +1,13 @@
+bin/
+target/
+
+.cache
+.cache-main
+.cache-tests
+.classpath
+.project
+.settings/
+.worksheet/
+
+.idea/
+.idea_modules/
