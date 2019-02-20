@@ -10,10 +10,11 @@ case class Person(anrede: String, titel: String, vorname: String, name: String) 
 
 object TestdataGenerators {
   val intGen = Arbitrary.arbitrary[Int]
-  val smallEvenIntGen = Gen.choose(0, 200) suchThat (_ % 2 == 0)
-  val lottoGen: Gen[Seq[Int]] = Gen.pick(6, 1 to 49)
   val doubleGen = Arbitrary.arbitrary[Double]
   val stringGen = Arbitrary.arbitrary[String]
+
+  val smallEvenIntGen = Gen.choose(0, 200) suchThat (_ % 2 == 0)
+  val lottoGen: Gen[Seq[Int]] = Gen.pick(6, 1 to 49)
 
   val titelGen = Gen.oneOf("", "Dr.", "Prof.")
   val titelFreqGen = Gen.frequency(

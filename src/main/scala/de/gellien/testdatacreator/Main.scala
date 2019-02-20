@@ -24,14 +24,17 @@ object Main {
     showSamples(smallEvenIntGen, n)
     showSamples(lottoGen, n)
     showSamples(doubleGen, n)
+
     //    showSamples(stringGen, n)
     //    showSamples(Gen.alphaStr, n)
-    //    showSamples(titelFreqGen, n)
-    //    val personen = showSamples(personGen, n)
 
-    //    val pRepr = personen.map(_.repr).mkString("List(", ", ", ")")
+    //    showSamples(titelFreqGen, n)
+
+    //    val personen = showSamples(personGen, n)
+    //
+    //    val pRepr = personen.map { case Some(p) => p.repr }.mkString("List(", ", ", ")")
     //    println(pRepr)
-    //    val ps = List(Person("Frau", "", "Ann", "Tesch"), Person("Herr", "Dr.", "Max", "Castro"), Person("Frau", "Dr.", "Fenja", "Stefan"), Person("Herr", "", "Raphael", "Caspari"), Person("Herr", "Dr.", "Adrian", "Kautz"))
+    //    val ps = List(Person("Herr", "", "Anton", "Böhm"), Person("Frau", "Dr.", "Ulrike", "Blum"), Person("Herr", "", "Conner", "Wirtz"), Person("Frau", "", "Alisa", "Ramirez"), Person("Herr", "", "Alfred", "Peter"))
     //    ps foreach println
 
     println("=========== Main End")
