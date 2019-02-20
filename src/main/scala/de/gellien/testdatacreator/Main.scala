@@ -5,7 +5,7 @@ import org.scalacheck.Gen
 
 object Main {
 
-  def showSamples[T](gen: Gen[T], n: Int = 10) = {
+  def showSamples[T](gen: Gen[T], n: Int) = {
     val result = for (i <- 1 to n) yield gen.sample
     for ((line, idx) <- result.zipWithIndex) {
       line match {
@@ -21,7 +21,6 @@ object Main {
     val n = 5
 
     showSamples(intGen, n)
-    showSamples(smallEvenIntGen, n)
     showSamples(lottoGen, n)
     showSamples(doubleGen, n)
 
@@ -31,7 +30,7 @@ object Main {
     //    showSamples(titelFreqGen, n)
 
     //    val personen = showSamples(personGen, n)
-    //
+
     //    val pRepr = personen.map { case Some(p) => p.repr }.mkString("List(", ", ", ")")
     //    println(pRepr)
     //    val ps = List(Person("Herr", "", "Anton", "Böhm"), Person("Frau", "Dr.", "Ulrike", "Blum"), Person("Herr", "", "Conner", "Wirtz"), Person("Frau", "", "Alisa", "Ramirez"), Person("Herr", "", "Alfred", "Peter"))
