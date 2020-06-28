@@ -1,6 +1,6 @@
-package de.gellien.testdatacreator
+//package de.gellien.testdatacreator
 
-import TestdataGenerators._
+import de.gellien.testdatacreator.TestdataGenerators._
 import org.scalacheck.Gen
 
 object Demo {

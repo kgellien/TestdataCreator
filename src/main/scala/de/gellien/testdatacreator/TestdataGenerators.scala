@@ -13,7 +13,7 @@ object TestdataGenerators {
   val doubleGen = Arbitrary.arbitrary[Double]
   val stringGen = Arbitrary.arbitrary[String]
 
-  val lottoGen: Gen[Seq[Int]] = Gen.pick(6, 1 to 49)
+  val lottoGen = Gen.pick(6, 1 to 49)
 
   val titelGen = Gen.oneOf("", "Dr.", "Prof.")
   val titelOptGen = Gen.option(Gen.oneOf("Dr.", "Prof."))
