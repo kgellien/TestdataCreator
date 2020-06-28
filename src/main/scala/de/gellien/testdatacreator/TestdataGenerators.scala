@@ -3,9 +3,9 @@ package de.gellien.testdatacreator
 import org.scalacheck.Gen
 import org.scalacheck.Arbitrary
 
-case class Person(anrede: String, titel: String, vorname: String, name: String) {
-  def repr = s"""Person("$anrede", "$titel", "$vorname", "$name")"""
-  override def toString = if (titel.isEmpty()) s"$anrede $vorname $name" else s"$anrede $titel $vorname $name"
+case class Person(titel: String, vorname: String, name: String, geschlecht: String) {
+  def repr = s"""Person("$titel", "$vorname", "$name", "$geschlecht")"""
+  override def toString = if (titel.isEmpty()) s"$vorname $name" else s"$titel $vorname $name"
 }
 
 object TestdataGenerators {
@@ -15,24 +15,31 @@ object TestdataGenerators {
 
   val lottoGen = Gen.pick(6, 1 to 49)
 
-  val titelGen = Gen.oneOf("", "Dr.", "Prof.")
-  val titelOptGen = Gen.option(Gen.oneOf("Dr.", "Prof."))
-  val titelFreqGen = Gen.frequency(
+  val titelGen = Gen.frequency(
     (7, Gen.const("")),
     (2, Gen.const("Dr.")),
     (1, Gen.const("Prof.")))
 
-  val anredeGen = Gen.oneOf("Frau", "Herr")
-  val vornameFrauGen = Gen.oneOf("Alisa", "Anja", "Ann", "Barbara", "Caroline", "Christiane", "Doris", "Julia", "Karoline", "Pauline", "Samantha", "Ulrike")
-  val vornameHerrGen = Gen.oneOf("Adrian", "Alfred", "André", "Anton", "Bernd", "Conner", "Harald", "Heinrich", "Lennart", "Max", "Rüdiger", "Valentin")
-  def vornameGen(anrede: String) = if (anrede == "Frau") vornameFrauGen else vornameHerrGen
-  val nachnameGen = Gen.oneOf("Abels", "Blum", "Böhm", "Ebner", "Gordon", "Grundmann", "Hofbauer", "Kuntz", "Peter", "Ramirez", "Schultheiss", "Voss", "Wirtz")
+  val geschlechter = List("m", "w", "d")
+
+  val vornamenM = List("Adrian", "Alfred", "André", "Anton", "Bernd", "Conner", "Harald", "Heinrich", "Lennart", "Max", "Rüdiger", "Valentin")
+  val vornamenW = List("Alisa", "Anja", "Ann", "Barbara", "Caroline", "Christiane", "Doris", "Julia", "Karoline", "Pauline", "Samantha", "Ulrike")
+  val vornamenD = vornamenW ++: vornamenM
+
+  val nachnamen = List("Abels", "Blum", "Böhm", "Ebner", "Gordon", "Grundmann", "Hofbauer", "Kuntz", "Peter", "Ramirez", "Schultheiss", "Voss", "Wirtz")
+
+  val geschlechtGen = Gen.oneOf(geschlechter)
+  def vornameGen(geschlecht: String) = geschlecht match {
+    case "m" => Gen.oneOf(vornamenM)
+    case "w" => Gen.oneOf(vornamenW)
+    case "d" => Gen.oneOf(vornamenD)
+  }
+  val nachnameGen = Gen.oneOf(nachnamen)
 
   val personGen = for {
-    //    titel <- titelGen
-    titel <- titelFreqGen
-    anrede <- anredeGen
-    vorname <- vornameGen(anrede)
+    geschlecht <- geschlechtGen
+    titel <- titelGen
+    vorname <- vornameGen(geschlecht)
     name <- nachnameGen
-  } yield Person(anrede, titel, vorname, name)
+  } yield Person(titel, vorname, name, geschlecht)
 }
