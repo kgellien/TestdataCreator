@@ -9,13 +9,13 @@ case class Person(titel: String, vorname: String, name: String, geschlecht: Stri
 }
 
 object TestdataGenerators {
-  val intGen = Arbitrary.arbitrary[Int]
-  val doubleGen = Arbitrary.arbitrary[Double]
-  val stringGen = Arbitrary.arbitrary[String]
+  val intGen: Gen[Int] = Arbitrary.arbitrary[Int]
+  val doubleGen: Gen[Double] = Arbitrary.arbitrary[Double]
+  val stringGen: Gen[String] = Arbitrary.arbitrary[String]
 
-  val lottoGen = Gen.pick(6, 1 to 49)
+  val lottoGen: Gen[collection.Seq[Int]] = Gen.pick(6, 1 to 49)
 
-  val titelGen = Gen.frequency(
+  val titelGen: Gen[String] = Gen.frequency(
     (7, Gen.const("")),
     (2, Gen.const("Dr.")),
     (1, Gen.const("Prof.")))
@@ -28,7 +28,7 @@ object TestdataGenerators {
 
   val nachnamen = List("Abels", "Blum", "Böhm", "Ebner", "Gordon", "Grundmann", "Hofbauer", "Kuntz", "Peter", "Ramirez", "Schultheiss", "Voss", "Wirtz")
 
-  val geschlechtGen = Gen.oneOf(geschlechter)
+  val geschlechtGen: Gen[String] = Gen.oneOf(geschlechter)
   def vornameGen(geschlecht: String) = geschlecht match {
     case "m" => Gen.oneOf(vornamenM)
     case "w" => Gen.oneOf(vornamenW)
@@ -36,7 +36,7 @@ object TestdataGenerators {
   }
   val nachnameGen = Gen.oneOf(nachnamen)
 
-  val personGen = for {
+  val personGen: Gen[Person] = for {
     geschlecht <- geschlechtGen
     titel <- titelGen
     vorname <- vornameGen(geschlecht)
