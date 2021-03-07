@@ -4,7 +4,7 @@ organization := "de.gellien"
 
 version := "1.0.1"
 
-scalaVersion := "2.13.1"
+scalaVersion := "2.13.4"
 
 scalacOptions ++= Seq("-deprecation", "-unchecked")
 
