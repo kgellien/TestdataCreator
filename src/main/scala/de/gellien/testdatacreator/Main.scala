@@ -22,8 +22,9 @@ object Main {
     val n = 5
 
     showSamples("Some integers", intGen, n)
-    showSamples("Lottery numbers", lottoGen, n)
     showSamples("Some doubles", doubleGen, n)
+
+    showSamples("Lottery numbers", lottoGen, n)
 
     showSamples("Some strings (unicode!)", stringGen, n)
     showSamples("Some alpha strings", Gen.alphaStr, n)
